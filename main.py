@@ -2,7 +2,8 @@
 def playSoundEffect(name: str):
     if name == "beep":
         music.play_tone(466, music.beat(BeatFraction.WHOLE))
-# directional arrow hall latern, similar to OTIS
+
+# directional arrow hall latern
 def elevatorDirection(direction: number):
     global display_direction_arrows_frames, display
     # going up

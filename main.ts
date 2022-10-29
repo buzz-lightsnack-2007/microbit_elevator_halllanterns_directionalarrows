@@ -1,90 +1,82 @@
-// audio configuration
-function playSoundEffect (name: string) {
+//  audio configuration
+function playSoundEffect(name: string) {
     if (name == "beep") {
         music.playTone(466, music.beat(BeatFraction.Whole))
     }
+    
 }
-// directional arrow hall latern, similar to OTIS
-function elevatorDirection (direction: number) {
-    // going up
+
+//  directional arrow hall latern
+function elevatorDirection(direction: number) {
+    
+    //  going up
     if (direction >= 1) {
-        display_direction_arrows_frames = [
-        images.createImage(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . # . .
-            `),
-        images.createImage(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . # . .
-            . # # # .
-            `),
-        images.createImage(`
-            . . . . .
-            . . . . .
-            . . # . .
-            . # # # .
-            . # # # .
-            `),
-        images.createImage(`
-            . . . . .
-            . . # . .
-            . # # # .
-            . # # # .
-            . # # # .
-            `),
-        images.createImage(`
-            . . # . .
-            . # # # .
-            # # # # #
-            . # # # .
-            . # # # .
-            `)
-        ]
+        display_direction_arrows_frames = [images.createImage(`
+                . . . . .
+                            . . . . .
+                            . . . . .
+                            . . . . .
+                            . . # . .
+            `), images.createImage(`
+                . . . . .
+                            . . . . .
+                            . . . . .
+                            . . # . .
+                            . # # # .
+            `), images.createImage(`
+                . . . . .
+                            . . . . .
+                            . . # . .
+                            . # # # .
+                            . # # # .
+            `), images.createImage(`
+                . . . . .
+                            . . # . .
+                            . # # # .
+                            . # # # .
+                            . # # # .
+            `), images.createImage(`
+                . . # . .
+                            . # # # .
+                            # # # # #
+                            . # # # .
+                            . # # # .
+            `)]
     } else if (direction <= -1) {
-        // going down
-        display_direction_arrows_frames = [
-        images.createImage(`
-            . . # . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `),
-        images.createImage(`
-            . # # # .
-            . . # . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `),
-        images.createImage(`
-            . # # # .
-            . # # # .
-            . . # . .
-            . . . . .
-            . . . . .
-            `),
-        images.createImage(`
-            . # # # .
-            . # # # .
-            . # # # .
-            . . # . .
-            . . . . .
-            `),
-        images.createImage(`
-            . # # # .
-            . # # # .
-            # # # # #
-            . # # # .
-            . . # . .
-            `)
-        ]
+        //  going down
+        display_direction_arrows_frames = [images.createImage(`
+                . . # . .
+                            . . . . .
+                            . . . . .
+                            . . . . .
+                            . . . . .
+            `), images.createImage(`
+                . # # # .
+                            . . # . .
+                            . . . . .
+                            . . . . .
+                            . . . . .
+            `), images.createImage(`
+                . # # # .
+                            . # # # .
+                            . . # . .
+                            . . . . .
+                            . . . . .
+            `), images.createImage(`
+                . # # # .
+                            . # # # .
+                            . # # # .
+                            . . # . .
+                            . . . . .
+            `), images.createImage(`
+                . # # # .
+                            . # # # .
+                            # # # # #
+                            . # # # .
+                            . . # . .
+            `)]
     }
+    
     for (let display_current of display_direction_arrows_frames) {
         display = display_current
         display.showImage(0)
@@ -97,27 +89,30 @@ function elevatorDirection (direction: number) {
         }
     }
 }
-// remotely receive data about the lift
-radio.onReceivedValue(function (name2, value) {
+
+//  remotely receive data about the lift
+radio.onReceivedValue(function on_received_value(name2: string, value: number) {
+    
     let configuration_floorNumber = 0
     if (name2 == "beep" && value == configuration_floorNumber) {
         playSoundEffect("beep")
     } else if (name2 == "dir_" + ("" + configuration_floorNumber)) {
         elevator_call_direction = value
     } else {
-    	
+        
     }
+    
 })
+let display_direction_arrows_frames : Image[] = []
+let display : Image = null
 let elevator_call_direction = 0
-let display_direction_arrows_frames: Image[] = []
-let display: Image = null
 display = images.createImage(`
     . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    `)
-basic.forever(function () {
-	
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+`)
+basic.forever(function on_forever() {
+    
 })
